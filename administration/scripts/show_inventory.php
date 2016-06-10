@@ -55,10 +55,10 @@
                     <div class="card-image">
 						<div class="row">
 							<div class="btn-holder">
-								<img id="'.$id.'-delete" class="card-action-item delete-btn" src="../images/delete.svg">
+								<img id="'.$id.'-delete" class="card-action-item delete-btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Item" src="../images/delete.svg">
 							</div> 
 							<div class="btn-holder">
-								<img id="'.$id.'-update" class="card-action-item update-btn" src="../images/update.svg">
+								<img id="'.$id.'-update" class="card-action-item update-btn tooltipped" data-position="left" data-delay="50" data-tooltip="Update Item Information" src="../images/update.svg">
 							</div> 
 						</div>
                         <img id="'.$id.'-image_name" class="item-image" src="../images/inventory/'.$image.'">

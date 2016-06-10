@@ -1,3 +1,15 @@
+nav{
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index:5;
+}
+
+#application_area
+{
+	margin-top:80px;
+}
+
 .brand {
 	font-family: lato;
 	font-size: .9em;
@@ -46,4 +58,25 @@
 	left: 0px;
 	width: 25%;
 	height: 25px;
+}
+
+.view-heading{
+	font-family:lato;
+	font-size:1.6em;
+	color:rgba(0,0,0,.8);
+}
+
+.return-button-container
+{
+	position:absolute;
+	top:10px;
+	right:30px;
+}
+
+.return-button{
+	height:40px;
+}
+
+.collapsible-body{
+	position:relative;
 }

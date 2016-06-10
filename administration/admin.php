@@ -34,7 +34,7 @@ if($_SESSION['CATEGORY'] == 'admin' && $_SESSION['USER'] != ""){
                 <a href="" class="brand-logo">
                     <span class="brand">Inventory Control</span>
                 </a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <ul id="nav-mobile" class="right hide-on-sm">
                     <li class="menu-item"><a class="current" href="">current</a></li>
                     <li class="menu-item"><a class="reports" href="">reports</a></li>
                     <li class="menu-item"><a class="inventory" href="">inventory</a></li>
@@ -48,7 +48,7 @@ if($_SESSION['CATEGORY'] == 'admin' && $_SESSION['USER'] != ""){
         <div class="row">
             <div class="col s12 center-align">
                 <div id="application_area">
-
+                    
                 </div>
             </div>
         </div>

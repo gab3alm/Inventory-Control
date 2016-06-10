@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	// $("#application_area").load("main_load.php");
 	ajax_call("main_load", "");
+	admin_operations();
 });
 
 function admin_operations() {
@@ -11,7 +12,7 @@ function admin_operations() {
 	});
 
 	$(".current").click(function () {
-		ajax_call("current|report_load", "current");		
+		ajax_call("current|report_load", "current");	
 		return false;
 	});
 
@@ -24,25 +25,12 @@ function admin_operations() {
 		ajax_call("inventory_load", "");		
 		return false;
 	});
+}
 
-	$("#current_view").click(function () {
-		// $("#application_area").load("inventory_load.php");
-		ajax_call("current|report_load", "current");		
-		return false;
+function activate_return(){
+	$(".return-button-container").click(function(){
+		alert("This feature will be implemented soon!");
 	});
-
-	$("#report_view").click(function () {
-		// $("#application_area").load("inventory_load.php");
-		ajax_call("current|report_load", "report");		
-		return false;
-	});
-
-	$("#inventory_view").click(function () {
-		// $("#application_area").load("inventory_load.php");
-		ajax_call("inventory_load", "");		
-		return false;
-	});
-
 }
 
 function ajax_call(filename, action){
@@ -51,11 +39,12 @@ function ajax_call(filename, action){
 		type: "POST",
 		data: { 'ACTION': action},
 		success: function(response){
-			$("#application_area").empty().append(response).hide().fadeIn();
-			if(action != ""){
-				$('.collapsible').collapsible();
+			$("#application_area").empty().append(response).hide().fadeIn(800);
+			$('.collapsible').collapsible();
+			$('.tooltipped').tooltip({delay: 50});
+			if(action == "current"){
+				activate_return();		
 			}
-			admin_operations();
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			alert(errorThrown);

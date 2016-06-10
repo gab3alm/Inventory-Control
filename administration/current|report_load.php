@@ -23,7 +23,7 @@ function create_view($view){
 		$heading = '<p class="view-heading">Current Items</p>';
 		$statement = "SELECT * FROM $table WHERE returned='0000-00-00 00:00:00'";
 	}else if($view == "report"){
-		$heading = '<p class="view-heading">History</p>';
+		$heading = '<p class="view-heading">Request History</p>';
 		$statement = "SELECT * FROM $table";
 	}
 	$borrowers = $connection->query($statement);
@@ -38,7 +38,7 @@ function create_view($view){
 			$borrower_data = $borrower_info['items'];
 			$borrower_checkout = $borrower_info['date'];
 			$borrower_return = $borrower_info['returned'];
-			create_borrower($id, $borrower_id, $borrower_data, $borrower_checkout, $borrower_return, $connection);
+			create_borrower($view, $id, $borrower_id, $borrower_data, $borrower_checkout, $borrower_return, $connection);
 			echo '</ul>';
 		}
 	}else{
@@ -47,9 +47,13 @@ function create_view($view){
 	$connection->close();
 }
 
-function create_borrower($num, $id, $items, $checkout, $return, $connection){
+function create_borrower($view, $num, $id, $items, $checkout, $return, $connection){
+	$return_button = "";
 	if($return == "0000-00-00 00:00:00"){
 		$return = "Not Yet";
+		if($view == "current"){
+			$return_button = '<div class="return-button-container"><img class="return-button tooltipped" data-position="left" data-delay="50" data-tooltip="Were the items returned? (coming soon)" src="../images/submit.svg" alt="submit"></div>';
+		}
 	}
 	echo '
 	<li>
@@ -61,7 +65,10 @@ function create_borrower($num, $id, $items, $checkout, $return, $connection){
 				<div id="borrower_return" class="col s6 m2 borrower-info"><p class="current-header">Returned</p>'.$return.'</div>
 			</div>
 		</div>
-		<div class="collapsible-body"><p>'.get_item_list($items, $connection).'</p></div>
+		<div class="collapsible-body">
+			'.$return_button.'
+			<p>'.get_item_list($items, $connection).'</p>
+		</div>
 	</li>
 	';
 }

@@ -42,8 +42,10 @@ function initialize_actions() {
 function create_editable_card(card) {
     var id = $(card).attr("id").split("-");
     var card_number = id[0];
+    $('.tooltipped').tooltip('remove');
     $("#" + card_number + "-update").hide().parent().append('<img class="card-action-item submit-btn tooltipped" data-position="left" data-delay="50" data-tooltip="Update Item" src="../images/submit.svg">').hide().fadeIn(1500);
-    $("#" + card_number + "-delete").hide().parent().append('<img class="card-action-item cancel-btn tooltipped" data-position="right" data-delay="50" data-tooltip="Delete Item" src="../images/cancel.svg">').hide().fadeIn(1500);
+    $("#" + card_number + "-delete").hide().parent().append('<img class="card-action-item cancel-btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel" src="../images/cancel.svg">').hide().fadeIn(1500);
+    $('.tooltipped').tooltip({delay: 50});
     //||||||||||||||||||||||||||||||||||||||||||||||
     //|||CREATE THE EDITABLE NAME FIELD
     //||||||||||||||||||||||||||||||||||||||||||||||
@@ -124,10 +126,12 @@ function create_editable_card(card) {
         var lost = $("#editable-lost").val();
         var broken = $("#editable-broken").val();
         update_db(row, name, category, description, quantity, available, lost, broken);
+        $('.tooltipped').tooltip('remove');
     });
 
     $(".cancel-btn").click(function () {
         card_default(card_number, current_name, current_category, current_description, current_quantity, current_available, current_lost, current_broken);
+        $('.tooltipped').tooltip('remove');
     });
 }
 
