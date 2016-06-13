@@ -40,8 +40,8 @@ function ajax_call(filename, action){
 		data: { 'ACTION': action},
 		success: function(response){
 			$("#application_area").empty().append(response).hide().fadeIn(800);
-			$('.collapsible').collapsible();
 			$('.tooltipped').tooltip({delay: 50});
+			$(".collapsible").collapsible();
 			if(action == "current"){
 				activate_return();		
 			}

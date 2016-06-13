@@ -16,8 +16,6 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-
-
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||\
 //CATEGORY SELECTION BUTTONS - START
 //This is the main function being called
@@ -62,8 +60,8 @@ function button_selection() {
  * @param  {[category button element]}
  * @return {[void]}
  */
-function select(item) {
-	animate_button(item);
+ function select(item) {
+ 	animate_button(item);
 	// you have to select the two bubbles at once
 	var shared_class = $(item).attr("class").split(' ')[1];
 	$("."+shared_class).attr("id", "selected");
@@ -86,21 +84,21 @@ function select(item) {
  * @param  {[button element]}
  * @return {[void]}
  */
-function deselect(item) {
-	animate_button(item);
-	var shared_class = $(item).attr("class").split(' ')[1];
-	$("."+shared_class).attr("id", "");
+ function deselect(item) {
+ 	animate_button(item);
+ 	var shared_class = $(item).attr("class").split(' ')[1];
+ 	$("."+shared_class).attr("id", "");
 
-	var target = $("."+shared_class).children(":first").attr('class').split(" ")[0];
-	$("."+target).css({
-		background: ""
-	});
-	
-	var target = $("."+target).children(":first").attr("class").split(" ")[0];
-	$("."+target).css({
-		opacity: "1"
-	});
-}
+ 	var target = $("."+shared_class).children(":first").attr('class').split(" ")[0];
+ 	$("."+target).css({
+ 		background: ""
+ 	});
+ 	
+ 	var target = $("."+target).children(":first").attr("class").split(" ")[0];
+ 	$("."+target).css({
+ 		opacity: "1"
+ 	});
+ }
 
 /**
  * animate_button |
@@ -109,14 +107,14 @@ function deselect(item) {
  * @param  {[item - button element]}
  * @return {[void]}
  */
-function animate_button(item) {
-	var selector = $(item).children(":first").attr("class").split(' ')[0];
-	var specific = "."+selector;
-	$(specific).addClass("animated flip");
-	setTimeout(function () { 
-		$(specific).removeClass("animated flip");
-	}, 700);
-}
+ function animate_button(item) {
+ 	var selector = $(item).children(":first").attr("class").split(' ')[0];
+ 	var specific = "."+selector;
+ 	$(specific).addClass("animated flip");
+ 	setTimeout(function () { 
+ 		$(specific).removeClass("animated flip");
+ 	}, 700);
+ }
 
 /**
  * create_item_list |
@@ -127,10 +125,10 @@ function animate_button(item) {
  * @param  {[selected - category button clicked]}
  * @return {[void]}
  */
-function create_item_list(selected) {
-	var category = $(selected).children(":first").children(":first").attr("id");
-	$("#"+category+"_inventory").fadeIn(500);
-}
+ function create_item_list(selected) {
+ 	var category = $(selected).children(":first").children(":first").attr("id");
+ 	$("#"+category+"_inventory").fadeIn(500);
+ }
 
 /**
  * destroy_item_list |
@@ -139,10 +137,10 @@ function create_item_list(selected) {
  * @param  {[selected - category button clicked]}
  * @return {[void]}
  */
-function destroy_item_list(selected) {
-	var category = $(selected).children(":first").children(":first").attr("id");
-	$("#"+category+"_inventory").fadeOut(800);
-}
+ function destroy_item_list(selected) {
+ 	var category = $(selected).children(":first").children(":first").attr("id");
+ 	$("#"+category+"_inventory").fadeOut(800);
+ }
 
 
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -155,18 +153,18 @@ function destroy_item_list(selected) {
  * and calls its corresponding function depending on the selection state
  * @return {[void]}
  */
-function activate_card(){
-	$('.card').click(function(){
-		var card = $(this);
-		var selected = $(card).attr("id");
-		if(selected == "unselected"){
-			select_card(card);			
-		}else{
-			deselect_card(card);
-		}
-		animate_card(card);
-	});
-}
+ function activate_card(){
+ 	$('.card').click(function(){
+ 		var card = $(this);
+ 		var selected = $(card).attr("id");
+ 		if(selected == "unselected"){
+ 			select_card(card);			
+ 		}else{
+ 			deselect_card(card);
+ 		}
+ 		animate_card(card);
+ 	});
+ }
 
 /**
  * animate_card |
@@ -175,12 +173,12 @@ function activate_card(){
  * @param  {[card element]}
  * @return {[void]}
  */
-function animate_card(card){
-	setTimeout(function() {
-		$(card).removeClass("animated bounce");
-	}, 1000);
-	$(card).addClass("animated bounce");
-}
+ function animate_card(card){
+ 	setTimeout(function() {
+ 		$(card).removeClass("animated bounce");
+ 	}, 1000);
+ 	$(card).addClass("animated bounce");
+ }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||||
 // CARD SELECTION LOGIC
@@ -194,8 +192,8 @@ function animate_card(card){
  * @param  {[card element]}
  * @return {[void]}
  */
-function select_card(card){
-	$(card).attr("id", "selected");
+ function select_card(card){
+ 	$(card).attr("id", "selected");
 	// $(card).animate({background:"url('../images/success.svg')"});
 	$(card).css("background-image","url('../images/success.svg')");
 	$(card).css("background-size", "cover");
@@ -213,7 +211,7 @@ function select_card(card){
  * @param  {[selected card element]}
  * @return {[void]}
  */
-function push_item_to_cart(card){
+ function push_item_to_cart(card){
 	//recording of item-id is necessary, additional data is obtained from database
 	var row = $(card).attr('class').split(" ")[0].split("-")[0];
 	// the structure of the array is the following, ["unique-element-id", "amount being taken by user"]
@@ -230,17 +228,17 @@ function push_item_to_cart(card){
  * Look into the Materialize css library to see the structure of Collections
  * @return {[void]}
  */
-function display_cart(){
-	var listing = "<ul class='collection'>";
-	for(var i = 0; i < item_cart.length; i++){
-		var item_id = "."+ item_cart[i][0] +"-item";
-		var name = $(item_id).find(".card-title").html();
-		var available = $(item_id).find(".item_available").html().split(" ")[0];
-		listing += create_cart_item(i, name, available);
-	}
-	var listing = listing + "</ul>";
-	return listing;
-}
+ function display_cart(){
+ 	var listing = "<ul class='collection'>";
+ 	for(var i = 0; i < item_cart.length; i++){
+ 		var item_id = "."+ item_cart[i][0] +"-item";
+ 		var name = $(item_id).find(".card-title").html();
+ 		var available = $(item_id).find(".item_available").html().split(" ")[0];
+ 		listing += create_cart_item(i, name, available);
+ 	}
+ 	var listing = listing + "</ul>";
+ 	return listing;
+ }
 
 /**
  * create_cart_item |
@@ -251,21 +249,21 @@ function display_cart(){
  * @param  {[available - max number of items that a user can take]}
  * @return {[type]}
  */
-function create_cart_item(id, name, available){
-	var list_item = `
-	<li id="`+id+`" class="collection-item"> 
-	<div class="row">
-	<div class="delete-cart-container"><img class="cart-item-delete-button tooltipped" data-position="left" data-delay="50" data-tooltip="Remove Item(coming soon)" src="../images/delete.svg"></div>
-	<div class="col s12 l5"><p class="cart-item-name">`+name+`</p></div>
-	<div class="input-field col s4 push-s4 l3">
-	<label class="active" for="amount">`+available+` Max</label>
-	<input max="`+available+`" min="1" value="1" id="`+id+`-amount" name="AMOUNT" type="number" class="validate" required>
-	</div>		
-	</div>
-	</li>
-	`;
-	return list_item;
-}
+ function create_cart_item(id, name, available){
+ 	var list_item = `
+ 	<li id="`+id+`" class="collection-item"> 
+ 	<div class="row">
+ 	<div class="delete-cart-container"><img class="cart-item-delete-button tooltipped" data-position="left" data-delay="50" data-tooltip="Remove Item(coming soon)" src="../images/delete.svg"></div>
+ 	<div class="col s12 l5"><p class="cart-item-name">`+name+`</p></div>
+ 	<div class="input-field col s4 push-s4 l3">
+ 	<label class="active" for="amount">`+available+` Max</label>
+ 	<input max="`+available+`" min="1" value="1" id="`+id+`-amount" name="AMOUNT" type="number" class="validate" required>
+ 	</div>		
+ 	</div>
+ 	</li>
+ 	`;
+ 	return list_item;
+ }
 
 /**
  * check_out | 
@@ -275,52 +273,53 @@ function create_cart_item(id, name, available){
  * It doesn't really return a value but it closes the cart modal
  * and it opens the message about taking care of the equipment
  */
-function check_out(){
-	get_borrowed_item_amount();
-	var cart_data = JSON.stringify(item_cart);
-	$.ajax({
-		url: "../scripts/add_borrower_to_db.php",
-		type: "POST",
-		data: { 'SERIALIZED-ITEMS': cart_data},
-		success: function(response){
-			$("#checkout_modal").closeModal();
-			$("#success_modal").openModal();
+ function check_out(){
+ 	get_borrowed_item_amount();
+ 	var cart_data = JSON.stringify(item_cart);
+ 	$.ajax({
+ 		url: "../scripts/add_borrower_to_db.php",
+ 		type: "POST",
+ 		data: { 'SERIALIZED-ITEMS': cart_data},
+ 		success: function(response){
+ 			$("#checkout_modal").closeModal();
+ 			$("#success_modal").openModal();
+			// console.log(response);
 		},
 		error: function (jqXHR, textStatus, errorThrown){
-			alert(errorThrown);
+			// alert(errorThrown);
 		}
 	});
-}
+ }
 
 /**
  * get_borrowed_item_amount |
  * It updates the amount taken if the user changed its default value of 1
  * @return {[void]}
  */
-function get_borrowed_item_amount(){
-	for(var i = 0; i < item_cart.length; i++){
-		var amount = $("#"+i+"-amount").val();
-		item_cart[i][1] = amount;
-	}
-}
+ function get_borrowed_item_amount(){
+ 	for(var i = 0; i < item_cart.length; i++){
+ 		var amount = $("#"+i+"-amount").val();
+ 		item_cart[i][1] = amount;
+ 	}
+ }
 
 /**
  * logout |
  * When the user checks their items out, they are automatically logged out
  * @return {[void]}
  */
-function logout(){
-	$.ajax({
-		url: "../scripts/logout.php",
-		success: function(response){
-			$("#success_modal").closeModal();
-			window.location.replace("user_login.php");
-		},
-		error: function (jqXHR, textStatus, errorThrown){
-			alert(errorThrown);
-		}
-	});	
-}
+ function logout(){
+ 	$.ajax({
+ 		url: "../scripts/logout.php",
+ 		success: function(response){
+ 			$("#success_modal").closeModal();
+ 			window.location.replace("user_login.php");
+ 		},
+ 		error: function (jqXHR, textStatus, errorThrown){
+ 			alert(errorThrown);
+ 		}
+ 	});	
+ }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||||
 // CARD UNSELECTION LOGIC
@@ -332,14 +331,14 @@ function logout(){
  * @param  {[card element]}
  * @return {[void]}
  */
-function deselect_card(card){
-	$(card).attr("id", "unselected");
-	$(card).css("background-image","");
-	$(card).css("background-color", "");
-	$(card).find(".card-image-container").css("opacity", "1");
-	$(card).find(".card-content").css("opacity", "1");
-	pop_item_to_cart(card);
-}
+ function deselect_card(card){
+ 	$(card).attr("id", "unselected");
+ 	$(card).css("background-image","");
+ 	$(card).css("background-color", "");
+ 	$(card).find(".card-image-container").css("opacity", "1");
+ 	$(card).find(".card-content").css("opacity", "1");
+ 	pop_item_to_cart(card);
+ }
 
 /**
  * pop_item_to_cart |
@@ -347,7 +346,7 @@ function deselect_card(card){
  * @param  {[card element]}
  * @return {[void]}
  */
-function pop_item_to_cart(card){
+ function pop_item_to_cart(card){
 	//recording of item-id is necessary, additional data is obtained from database
 	var row = $(card).attr('class').split(" ")[0].split("-")[0];
 	var item = [row, "1"];
@@ -369,19 +368,19 @@ function pop_item_to_cart(card){
  * Erases the <li> element that was selected
  * @return {[void]}
  */
-function cart_item_deletion(){
-	$(".collection-item").hover(function(){
-		$(this).find(".delete-cart-container").show();
-		var cart_item_id = $(this).attr("id");
-		$(this).find(".delete-cart-container").click(function(){
-			var real_id = item_cart[cart_item_id][0];
-			var target_card = $("."+real_id+"-item");
+ function cart_item_deletion(){
+ 	$(".collection-item").hover(function(){
+ 		$(this).find(".delete-cart-container").show();
+ 		var cart_item_id = $(this).attr("id");
+ 		$(this).find(".delete-cart-container").click(function(){
+ 			var real_id = item_cart[cart_item_id][0];
+ 			var target_card = $("."+real_id+"-item");
 			// deselect_card(target_card);
 			// $(this).find('.tooltipped').tooltip('remove');
 			// var new_listing = display_cart();
 			// $("#final_item_cart").empty().append(new_listing);
 		});	
-	}, function(){
-		$(this).find(".delete-cart-container").hide();	
-	});
-}
+ 	}, function(){
+ 		$(this).find(".delete-cart-container").hide();	
+ 	});
+ }

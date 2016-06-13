@@ -48,26 +48,29 @@ function create_view($view){
 }
 
 function create_borrower($view, $num, $id, $items, $checkout, $return, $connection){
-	$return_button = "";
+	$items_to_return = "";
 	if($return == "0000-00-00 00:00:00"){
 		$return = "Not Yet";
 		if($view == "current"){
-			$return_button = '<div class="return-button-container"><img class="return-button tooltipped" data-position="left" data-delay="50" data-tooltip="Were the items returned? (coming soon)" src="../images/submit.svg" alt="submit"></div>';
+			$items_to_return = return_item_list($num, $id, $items, $connection);
 		}
 	}
 	echo '
 	<li>
 		<div class="collapsible-header">
 			<div class="row">
-				<div id="borrower_id" class="col s2 m2 borrower-info"><p class="current-header">Request #</p>'.$num.'</div>
-				<div id="borrower_name" class="col s10 m6 borrower-info"><p class="current-header">Student</p>'.get_borrower_name($id, $connection).'</div>
-				<div id="borrower_take" class="col s6 m2 borrower-info"><p class="current-header">Checked Out</p>'.$checkout.'</div>
-				<div id="borrower_return" class="col s6 m2 borrower-info"><p class="current-header">Returned</p>'.$return.'</div>
+				<div id="borrower_id" class="col s6 l2 borrower-info"><p class="current-header">Request #</p>'.$num.'</div>
+				<div id="borrower_name" class="col s6 l6 borrower-info"><p class="current-header">Student</p>'.get_borrower_name($id, $connection).'</div>
+				<div id="borrower_take" class="col s6 l2 borrower-info"><p class="current-header">Checked Out</p>'.$checkout.'</div>
+				<div id="borrower_return" class="col s6 l2 borrower-info"><p class="current-header">Returned</p>'.$return.'</div>
 			</div>
 		</div>
 		<div class="collapsible-body">
-			'.$return_button.'
-			<p>'.get_item_list($items, $connection).'</p>
+			<div class="row">
+				<div class="col push-l2 l6 m4 hide-on-small-only center-align"><img class="borrower-image" src="../images/success.svg" alt="user image"></div>
+				<div class="col s6 m4 push-l2 l4 left-align"><div class="item_list_container">'.get_item_list($items, $connection).'</div></div>
+				<div class="col s6 m4 l2 left-align"><div class="item_list_container">'.$items_to_return.'</div></div>
+			</div>
 		</div>
 	</li>
 	';
@@ -102,9 +105,41 @@ function get_item_list($items, $connection){
 		$item_exist = $item->num_rows;
 		if($item_exist != -1){
 			$data = $item->fetch_assoc();
-			$display = $display . " ". $data['name']." | ". $posts[$i][1] ."<br>";
+			$quantity_display = "<p class='items-taken'>".$posts[$i][1]."</p>";
+			$name_display = $data['name'];
+			$display =  $display.$quantity_display.$name_display." |<br>";
 		}
 	}	
+	return $display;
+}
+
+function return_item_list($request_num, $id, $items, $connection){
+	$posts = json_decode($items);
+	$max = sizeOf($posts);
+	$display = "<form action='./scripts/return_items_db.php' method='POST'>";
+	$unique_field = 9999;
+	for($i = 0; $i < $max; $i++, $unique_field--){
+		$table = "inventory";
+		$item_id = $posts[$i][0];
+		$statement = "SELECT * FROM $table WHERE identification='$item_id'";
+		$item = $connection->query($statement);
+		$item_exist = $item->num_rows;
+		if($item_exist != -1){
+			$data = $item->fetch_assoc();
+			$field_id = $id."-".$data['name']."-".$unique_field;
+			$field_label = $data['name']." | ".$posts[$i][1];
+			$field_value = $data['name']."_".$posts[$i][1];
+			$radio_display = '
+			<p class="return_form_field">
+				<input type="checkbox" class="return_field filled-in" id="'.$field_id.'" value="'.$field_value.'"/>
+				<label class="return_label" for="'.$field_id.'">'.$field_label.'</label>
+			</p>
+			';
+			$display =  $display.$radio_display;
+		}
+	}
+	$submit_button = "<button type='submit' class='waves-effect waves-teal red lighten-2 custm-btn btn'>Submit</button>";	
+	$display = $display.$submit_button."</form>";
 	return $display;
 }
 

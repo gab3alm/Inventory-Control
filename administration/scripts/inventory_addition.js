@@ -35,7 +35,7 @@ function item_to_db() {
 	var description = $("#item-description").val();
 	var quantity = $("#item-quantity").val();
 	$.ajax({
-		url: "scripts/item2db.php",
+		url: "scripts/itemAddition2db.php",
 		type: "POST",
 		data: {
 			"ITEM-NAME": name,

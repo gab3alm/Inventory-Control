@@ -8,7 +8,6 @@ if($_SESSION['USER'] == ""){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
