@@ -115,8 +115,9 @@ function get_item_list($items, $connection){
 
 function return_item_list($request_num, $id, $items, $connection){
 	$posts = json_decode($items);
+	$input = "";
 	$max = sizeOf($posts);
-	$display = "<form action='./scripts/return_items_db.php' method='POST'>";
+	$display = "<form id='item_return_".$request_num."'>";
 	$unique_field = 9999;
 	for($i = 0; $i < $max; $i++, $unique_field--){
 		$table = "inventory";
@@ -129,16 +130,21 @@ function return_item_list($request_num, $id, $items, $connection){
 			$field_id = $id."-".$data['name']."-".$unique_field;
 			$field_label = $data['name']." | ".$posts[$i][1];
 			$field_value = $data['name']."_".$posts[$i][1];
+			if($posts[$i][2] == "1"){
+				$input = '<input name="'.$id.'-'.$data['identification'].'" type="checkbox" checked="checked" class="return_field filled-in" id="'.$field_id.'" value="'.$field_value.'"/>';
+			}else{
+				$input = '<input name="'.$id.'-'.$data['identification'].'" type="checkbox" class="return_field filled-in" id="'.$field_id.'" value="'.$field_value.'"/>';
+			}
 			$radio_display = '
-			<p class="return_form_field">
-				<input type="checkbox" class="return_field filled-in" id="'.$field_id.'" value="'.$field_value.'"/>
+			<p class="return_form_field">'
+				.$input.'
 				<label class="return_label" for="'.$field_id.'">'.$field_label.'</label>
 			</p>
 			';
 			$display =  $display.$radio_display;
 		}
 	}
-	$submit_button = "<button type='submit' class='waves-effect waves-teal red lighten-2 custm-btn btn'>Submit</button>";	
+	$submit_button = "<button id='".$request_num."' class='".$max." waves-effect waves-teal red lighten-2 custm-btn btn'>Submit</button>";	
 	$display = $display.$submit_button."</form>";
 	return $display;
 }

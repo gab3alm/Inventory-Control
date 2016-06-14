@@ -28,8 +28,24 @@ function admin_operations() {
 }
 
 function activate_return(){
-	$(".return-button-container").click(function(){
-		alert("This feature will be implemented soon!");
+	$(".btn").click(function(){
+		var max = $(this).attr('class').split(" ")[0];
+		var request_num = $(this).attr("id");
+		var form_id = "#item_return_"+request_num;
+		var form_data = $(form_id).serialize();
+		console.log(form_data);
+		$.ajax({
+			type: "POST",
+			url: "./scripts/return_items_db.php",
+			data: {'encoded_items': form_data, "items_max": max, "borrower_id":request_num},
+			success: function(response){
+				console.log(response);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(errorThrown);
+			}
+		});
+		return false;
 	});
 }
 

@@ -217,7 +217,8 @@ function button_selection() {
 	// the structure of the array is the following, ["unique-element-id", "amount being taken by user"]
 	// row applies to the row of the item in its database
 	// "1" is the default since users have to take at least 1 items that they selected
-	var item = [row, "1"];
+	// "0" means that the item has not been returned yet |
+	var item = [row, "1", "0"];
 	item_cart.push(item);
 	$(".checkout_items").empty().append(item_cart.length);
 }
