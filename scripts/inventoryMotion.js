@@ -159,7 +159,7 @@ function button_selection() {
  		var selected = $(card).attr("id");
  		if(selected == "unselected"){
  			select_card(card);			
- 		}else{
+ 		}else if(selected == "selected"){
  			deselect_card(card);
  		}
  		animate_card(card);

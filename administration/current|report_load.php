@@ -48,12 +48,9 @@ function create_view($view){
 }
 
 function create_borrower($view, $num, $id, $items, $checkout, $return, $connection){
-	$items_to_return = "";
+	$items_to_return = return_item_list($view, $num, $id, $items, $connection);
 	if($return == "0000-00-00 00:00:00"){
 		$return = "Not Yet";
-		if($view == "current"){
-			$items_to_return = return_item_list($num, $id, $items, $connection);
-		}
 	}
 	echo '
 	<li>
@@ -113,7 +110,7 @@ function get_item_list($items, $connection){
 	return $display;
 }
 
-function return_item_list($request_num, $id, $items, $connection){
+function return_item_list($view, $request_num, $id, $items, $connection){
 	$posts = json_decode($items);
 	$input = "";
 	$max = sizeOf($posts);
@@ -136,15 +133,18 @@ function return_item_list($request_num, $id, $items, $connection){
 				$input = '<input name="'.$id.'-'.$data['identification'].'" type="checkbox" class="return_field filled-in" id="'.$field_id.'" value="'.$field_value.'"/>';
 			}
 			$radio_display = '
-			<p class="return_form_field">'
-				.$input.'
+			<p class="return_form_field">
+				'.$input.'
 				<label class="return_label" for="'.$field_id.'">'.$field_label.'</label>
 			</p>
 			';
 			$display =  $display.$radio_display;
 		}
 	}
-	$submit_button = "<button id='".$request_num."' class='".$max." waves-effect waves-teal red lighten-2 custm-btn btn'>Submit</button>";	
+	$submit_button = "";
+	if($view == "current"){
+		$submit_button = "<button id='".$request_num."' class='".$max." waves-effect waves-teal red lighten-2 custm-btn btn'>Submit</button>";	
+	}
 	$display = $display.$submit_button."</form>";
 	return $display;
 }

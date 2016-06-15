@@ -20,7 +20,6 @@ if($items_being_returned != 0){
 		$value_data = explode("_", $value);
 		$item_id = $key_data[1];
 		$item_amount = $value_data[1];
-
 		clear_item_from_borrower($borrower_id, $item_id, $item_amount, $connection);
 	}
 	if($items_being_returned == $total_items_due){

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 09, 2016 at 07:46 PM
+-- Generation Time: Jun 15, 2016 at 10:03 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -41,8 +41,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`identification`, `category`, `username`, `password`, `firstname`, `lastname`, `phone`) VALUES
-(1, 'student', 'gabriel', '$2y$10$6YbxyieBTVXwIeZE762LNe/rxFuJZztdoBtXjw6V.kfXiobnSvVzG', 'gabriel', 'almendarez', '8183566331'),
-(2, 'admin', 'ana', '$2y$10$uwxLM5Qi2kF3zX1oRtJlMu6tqrJuLl1WfMBFG6QAhrovCNTAscGO2', 'ana', 'penaranda', '8184568796');
+(1, 'admin', 'ana', '$2y$10$6YbxyieBTVXwIeZE762LNe/rxFuJZztdoBtXjw6V.kfXiobnSvVzG', 'ana', 'penaranda', '8183566331'),
+(2, 'student', 'gabriel', '$2y$10$uwxLM5Qi2kF3zX1oRtJlMu6tqrJuLl1WfMBFG6QAhrovCNTAscGO2', 'gabriel', 'almendarez', '8184568796');
 
 --
 -- Indexes for dumped tables

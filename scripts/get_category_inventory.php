@@ -48,9 +48,16 @@ if($category_rows != 0){
 $connection->close();
 
 function create_inventory_item($id, $item_image, $item_name, $item_description, $item_available){
+	$card_id = "";
+	$card_class= "";
+	if($item_available != "0"){
+		$card_id = "unselected";
+	}else{
+		$card_class = "red lighten-3";
+	}
 	echo '
 	<div class="col s12 m3">
-		<div id="unselected" class="'.$id.'-item card small hoverable">
+		<div id="'.$card_id.'" class="'.$id.'-item '.$card_class.' card small hoverable">
 			<div class="card-image-container waves-effect waves-block waves-light">
 				<img class="card-image" src="../images/inventory/'.$item_image.'">
 			</div>
