@@ -13,7 +13,6 @@ function add_button() {
 			ready: function () {
 				// clear every field when modal is ready
 				$("#item-name").val("");
-				//$("#item-description").val("");
 				$("#item-quantity").val("");
 			},
 			complete: function () {}

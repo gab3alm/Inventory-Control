@@ -39,7 +39,6 @@ function admin_operations() {
 	});
 
 	$(".inventory").click(function () {
-
 		$(".current").css("border-bottom","1px solid rgba(255,255,255,0)");
 		$(".reports").css("border-bottom","1px solid rgba(255,255,255,0)");
 		$(".inventory").css("border-bottom","1px solid rgba(255,255,255,1)");
@@ -55,8 +54,8 @@ function admin_operations() {
 		});
 
 		$(".list_view").click(function(){
-			$(".card_view").css("border-bottom","1px solid rgba(255,255,255,.5)");
-			$(".list_view").css("border-bottom","1px solid rgba(255,255,255,0)");			
+			$(".card_view").css("border-bottom","1px solid rgba(255,255,255,0)");
+			$(".list_view").css("border-bottom","1px solid rgba(255,255,255,.5)");			
 			ajax_call("list_inventory_load", "");
 		});
 

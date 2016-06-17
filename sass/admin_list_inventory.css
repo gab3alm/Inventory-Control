@@ -1,0 +1,55 @@
+.list-item-container{
+	position:relative;
+}
+
+.list-title{
+	font-family:lato;
+	font-size:1.2em;
+	font-weight:bold;
+	text-transform: capitalize;
+	border-bottom:1px solid rgba(0,0,0,.45);
+	margin-bottom:0px;
+	padding:0px !important;
+}
+
+.editable{
+	margin:0px !important;
+	padding:0px !important;
+	font-family:lato;
+	height:40px;
+	width:100% !important;
+	overflow:hidden;
+	text-transform:capitalize;
+}
+
+.editable-description{
+	font-size:1.1em;
+	text-align:left;
+	margin-top:20px !important;
+	text-transform: none !important;
+}
+
+.item-image{
+	height:160px;
+	padding:10px;
+}
+
+.submit-btn, .cancel-btn{
+	display:none;
+}
+
+.action-btn-holder{
+	position:absolute;
+	top:5px;
+	right:0px;
+	display:none;
+}
+
+.action-btn{
+	height:30px;
+	margin-right:10px;
+}
+
+.input-field{
+	margin-top:-20px !important;
+}
