@@ -19,6 +19,7 @@ function create_view($view){
 	$table = "borrowers";
 	$statement = "";
 	$heading = "";
+	$fullname = array();
 	if($view == "current"){
 		$heading = '<p class="view-heading">Current Items</p>';
 		$statement = "SELECT * FROM $table WHERE returned='0000-00-00 00:00:00'";
@@ -42,7 +43,7 @@ function create_view($view){
 			echo '</ul>';
 		}
 	}else{
-		echo 'You have no items out in the field';
+		echo '<p class="no_open_requests">All items have been turned in. Yay!</p>';
 	}
 	$connection->close();
 }
@@ -57,14 +58,14 @@ function create_borrower($view, $num, $id, $items, $checkout, $return, $connecti
 		<div class="collapsible-header">
 			<div class="row">
 				<div id="borrower_id" class="col s6 l2 borrower-info"><p class="current-header">Request #</p>'.$num.'</div>
-				<div id="borrower_name" class="col s6 l6 borrower-info"><p class="current-header">Student</p>'.get_borrower_name($id, $connection).'</div>
+				<div id="borrower_name" class="col s6 l6 borrower-info"><p class="current-header">Student</p>'.get_firstname($id, $connection).' '.get_lastname($id, $connection).' | '.get_phone($id, $connection).'</div>
 				<div id="borrower_take" class="col s6 l2 borrower-info"><p class="current-header">Checked Out</p>'.$checkout.'</div>
 				<div id="borrower_return" class="col s6 l2 borrower-info"><p class="current-header">Returned</p>'.$return.'</div>
 			</div>
 		</div>
 		<div class="collapsible-body">
 			<div class="row">
-				<div class="col push-l2 l6 m4 hide-on-small-only center-align"><img class="borrower-image" src="../images/success.svg" alt="user image"></div>
+				<div class="col push-l2 l6 m4 hide-on-small-only center-align"><img class="borrower-image" src="../images/users/'.get_firstname($id, $connection).'_'.get_lastname($id, $connection).'.png" alt="user image"></div>
 				<div class="col s6 m4 push-l2 l4 left-align"><div class="item_list_container">'.get_item_list($items, $connection).'</div></div>
 				<div class="col s6 m4 l2 left-align"><div class="item_list_container">'.$items_to_return.'</div></div>
 			</div>
@@ -74,19 +75,28 @@ function create_borrower($view, $num, $id, $items, $checkout, $return, $connecti
 }
 
 
-function get_borrower_name($identification, $connection){
+function get_firstname($identification, $connection){
 	$table = "users";
 	$statement = "SELECT * FROM $table WHERE identification='$identification'";
 	$result = $connection->query($statement);
-	$found = $result->num_rows;
-	$name = ""
-	;	if($found != 0){
-		$borrower = $result->fetch_assoc();
-		$name = $borrower['firstname'] ." ". $borrower['lastname'] ." | ". $borrower['phone'];
-	}else{
-		$name = "User not found!";
-	}
-	return $name;
+	$borrower = $result->fetch_assoc();
+	return $borrower['firstname'];
+}
+
+function get_lastname($identification, $connection){
+	$table = "users";
+	$statement = "SELECT * FROM $table WHERE identification='$identification'";
+	$result = $connection->query($statement);
+	$borrower = $result->fetch_assoc();
+	return $borrower['lastname'];
+}
+
+function get_phone($identification, $connection){
+	$table = "users";
+	$statement = "SELECT * FROM $table WHERE identification='$identification'";
+	$result = $connection->query($statement);
+	$borrower = $result->fetch_assoc();
+	return $borrower['phone'];
 }
 
 

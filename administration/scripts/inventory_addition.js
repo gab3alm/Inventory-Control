@@ -47,7 +47,7 @@ function item_to_db() {
 			// you will get response from your php page (what you echo or print)                 
 			$('#addition_modal').closeModal();
 			Materialize.toast(response, 4000);
-			$("#inventory_area").empty().load("scripts/show_inventory.php");
+			$("#inventory_area").empty().load("scripts/card_inventory.php");
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(textStatus, errorThrown);

@@ -2,27 +2,64 @@ $(document).ready(function () {
 	// $("#application_area").load("main_load.php");
 	ajax_call("main_load", "");
 	admin_operations();
+	animate_avatar();
 });
+
+function animate_avatar(){
+	$(".admin_avatar").addClass("animated bounce");
+	setTimeout(function(){
+		$(".admin_avatar").removeClass("animated bounce");
+	}, 1500);
+}
 
 function admin_operations() {
 	$(".brand").click(function () {
 		// $("#application_area").load("main_load.php");
 		ajax_call("main_load", "");
+		$("#inventory_views").fadeOut();		
 		return false;
 	});
 
 	$(".current").click(function () {
+		$(".current").css("border-bottom","1px solid rgba(255,255,255,.75)");
+		$(".reports").css("border-bottom","1px solid rgba(255,255,255,0)");
+		$(".inventory").css("border-bottom","1px solid rgba(255,255,255,0)");
 		ajax_call("current|report_load", "current");	
+		$("#inventory_views").fadeOut();		
 		return false;
 	});
 
 	$(".reports").click(function () {
+		$(".current").css("border-bottom","1px solid rgba(255,255,255,0)");
+		$(".reports").css("border-bottom","1px solid rgba(255,255,255,1)");
+		$(".inventory").css("border-bottom","1px solid rgba(255,255,255,0)");
 		ajax_call("current|report_load", "report");		
+		$("#inventory_views").fadeOut();		
 		return false;
 	});
 
 	$(".inventory").click(function () {
-		ajax_call("inventory_load", "");		
+
+		$(".current").css("border-bottom","1px solid rgba(255,255,255,0)");
+		$(".reports").css("border-bottom","1px solid rgba(255,255,255,0)");
+		$(".inventory").css("border-bottom","1px solid rgba(255,255,255,1)");
+
+		ajax_call("card_inventory_load", "");
+		$("#inventory_views").fadeIn(1000);
+		$(".card_view").css("border-bottom","1px solid rgba(255,255,255,.5)");	
+
+		$(".card_view").click(function(){
+			$(".card_view").css("border-bottom","1px solid rgba(255,255,255,.5)");
+			$(".list_view").css("border-bottom","1px solid rgba(255,255,255,0)");			
+			ajax_call("card_inventory_load", "");
+		});
+
+		$(".list_view").click(function(){
+			$(".card_view").css("border-bottom","1px solid rgba(255,255,255,.5)");
+			$(".list_view").css("border-bottom","1px solid rgba(255,255,255,0)");			
+			ajax_call("list_inventory_load", "");
+		});
+
 		return false;
 	});
 }

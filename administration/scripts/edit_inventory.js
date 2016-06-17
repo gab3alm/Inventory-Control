@@ -59,10 +59,15 @@ function create_editable_card(card) {
     //||||||||||||||||||||||||||||||||||||||||||||||
     var card_category_id = "#" + card_number + "-category";
     var current_category = $(card_category_id).html();
+    console.log(current_category);
     $.ajax({
         url: "scripts/get_categories.php",
+         type: "POST",
+        data: {
+            "CURRENT-CATEGORY": current_category,
+        },
         success: function (response) {
-            var start = '<select id="editable-category" value="' + current_category + '"  selected>';
+            var start = '<select id="editable-category">';
             var options = response;
             var end = '</select>';
             var box = start + options + end;
@@ -120,6 +125,7 @@ function create_editable_card(card) {
         var row = card_number;
         var name = $("#editable-name").val();
         var category = $("#editable-category option:selected").text();
+        console.log("sent category: "+ category);
         var description = $("#editable-description").val();
         var quantity = $("#editable-quantity").val();
         var available = $("#editable-available").val();
@@ -177,7 +183,8 @@ function card_default(id, name, category, description, quantity, available, lost
 
     $(".submit-btn").hide().parent().find("#" + id + "-update").fadeIn();
     $(".cancel-btn").hide().parent().find("#" + id + "-delete").fadeIn();
-    $("#inventory_area").empty().load("scripts/show_inventory.php");
+    $('.tooltipped').tooltip('remove');
+    $("#inventory_area").empty().load("scripts/card_inventory.php");
 }
 
 
@@ -193,7 +200,7 @@ function delete_card(card) {
         success: function (response) {
             // you will get response from your php page (what you echo or print)
             //Materialize.toast(response, 4000);
-            $("#inventory_area").empty().load("scripts/show_inventory.php");
+            $("#inventory_area").empty().load("scripts/card_inventory.php");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);

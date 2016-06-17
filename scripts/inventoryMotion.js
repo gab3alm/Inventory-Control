@@ -314,7 +314,7 @@ function button_selection() {
  		url: "../scripts/logout.php",
  		success: function(response){
  			$("#success_modal").closeModal();
- 			window.location.replace("user_login.php");
+ 			window.location.replace("index.php");
  		},
  		error: function (jqXHR, textStatus, errorThrown){
  			alert(errorThrown);

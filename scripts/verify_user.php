@@ -22,6 +22,7 @@ if($result_rows == 1){
 		$_SESSION['USER'] = $row_user['firstname'];
 		$_SESSION['CATEGORY'] = $row_user['category'];
 		if($row_user['category'] == "admin"){
+			$_SESSION['LAST'] = $row_user['lastname'];
 			header("location: ../administration/admin.php");
 		}else{
 			$_SESSION['IDENTIFICATION'] = $row_user['identification'];

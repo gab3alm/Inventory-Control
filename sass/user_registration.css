@@ -21,5 +21,17 @@ body {
 .message {
     color:rgba(255,255,255,.5) !important;
     font-size:1.2em !important;
-    
+}
+
+.application-logo{
+    height:250px !important;
+}
+
+.application-name{
+    margin:0px;
+    font-family:lato;
+    font-size:1.8em;
+    color:white;
+    /*text-shadow: 2px 2px 2px rgba(0,0,0,.5);*/
+    text-transform:uppercase;
 }

@@ -16,7 +16,7 @@
 	
 	$statement = "INSERT INTO `users`(`username`, `password`, `firstname`, `lastname`, `phone`) VALUES ('$username','$password','$first_name','$last_name','$phone')";
 	if($connection->query($statement)=== true){
-		header("location: ../public/user_login.php");
+		header("location: ../public/index.php");
 	}else{
 		header("location: ../public/user_registration.php");
 	}

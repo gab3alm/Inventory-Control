@@ -3,11 +3,13 @@ nav{
 	top:0px;
 	left:0px;
 	z-index:5;
+	height:180px;
+	background-color:rgba(183,56,49,1);
 }
 
 #application_area
 {
-	margin-top:80px;
+	margin-top:240px;
 }
 
 .brand {
@@ -45,25 +47,40 @@ nav{
 }
 
 .credits {
-	font-family: lato;
+	font-family: lato !important;
 	font-size: 1em;
 	text-transform: capitalize;
 	color: white;
-	margin: 0px;
+	margin-top:20px;
+	margin-left:20px;
 }
 
-.footer {
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	width: 25%;
-	height: 25px;
+.footer {	
+	z-index:5;
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	height: 60px;
+	background-color:rgba(183,56,49,1);
+}
+
+.cc_logo{
+	margin-top:15px;
+	height:30px;
 }
 
 .view-heading{
 	font-family:lato;
 	font-size:1.6em;
 	color:rgba(0,0,0,.8);
+}
+
+.no_open_requests{
+	font-family:lato;
+	font-size:1.5em;
+	padding:30px;
+	color:rgba(0,0,0,.75);
 }
 
 .return-button-container
@@ -85,6 +102,12 @@ nav{
 {
 	margin-top:20px;
 	height:150px;
+}
+
+.borrower-info{
+	font-family:lato;
+	font-size:1em;
+	text-transform:capitalize;
 }
 
 .items-taken{
@@ -122,4 +145,87 @@ nav{
 
 .custm-btn{
 	margin-top:30px;
+}
+
+.admin-navbar{
+	position:relative;
+}
+
+.app-logo{
+	height:170px;
+}
+
+.admin_avatar{
+	position:absolute;
+	bottom:0px;
+	left:calc(50% - 80px);
+	width:160px;
+}
+
+.navbar-triangle{
+	position:absolute;
+	bottom:-20px;
+	left:calc(50% - 100px);
+	width:200px;
+	z-index:-1;
+}
+
+.cust-btn{
+	font-family:lato;
+	color:rgba(0,0,0,.75);
+}
+
+.navrow{
+	margin:0px !important;
+
+}
+
+.logout-row{
+	height:75px;
+}
+
+.app-name-row{
+	height:30px;
+}
+
+.menu-row{
+	height:28px;
+}
+
+.application-name{
+	font-family:lato;
+	font-size:1.7em;
+	text-transform:uppercase;
+	color:white;
+}
+
+.current, .reports, .inventory{
+	font-family: lato;
+	font-size:1.2em;
+	margin-left:15px;
+	text-transform:capitalize;
+}
+
+@keyframes menu-hover{
+	from {border-bottom : 0px solid white;}
+	to {border-bottom : 1px solid rgba(255,255,255,.78);}
+}
+
+.current:hover,.reports:hover,.inventory:hover{
+	font-size:1.4em;
+	animation-name:menu-hover;
+	animation-duration:5s;
+}
+
+#inventory_views{
+	display:none;
+}
+
+.card_view, .list_view{
+	font-size:1.1em;
+	margin-left:10px;
+}
+
+.card_view:hover, .list_view:hover{
+	border-bottom:1px solid rgba(255,255,255,.5);
 }
