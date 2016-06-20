@@ -48,7 +48,7 @@ if($_SESSION['CATEGORY'] == 'admin' && $_SESSION['USER'] != ""){
         <div class="col push-l6 l3 s12 right-align">
           <!-- Logout button -->
           <div class="row navrow logout-row">
-            <button class="cust-btn btn waves-effect waves-light white darken-1">Logout</button>
+            <button id="user_logout" class="cust-btn btn waves-effect waves-light white darken-1">Logout</button>
           </div>
           <!-- application name -->
           <div class="row navrow app-name-row">

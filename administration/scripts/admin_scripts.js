@@ -20,6 +20,18 @@ function admin_operations() {
 		return false;
 	});
 
+	$("#user_logout").click(function(){
+		$.ajax({
+			url: "../scripts/logout.php",
+			success: function(response){
+				window.location.replace("../public");
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(errorThrown);
+			}
+		});
+	});
+
 	$(".current").click(function () {
 		$(".current").css("border-bottom","1px solid rgba(255,255,255,.75)");
 		$(".reports").css("border-bottom","1px solid rgba(255,255,255,0)");

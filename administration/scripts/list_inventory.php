@@ -19,6 +19,7 @@ if($number_rows != 0){
 		$items = $connection->query($statement);
 		$number_items = $items->num_rows;
 		if($number_items != 0){
+			echo '<div id="'.$target.'" class="item-category-section">';
 			echo '<h2 class="category-heading">'.$target.'</h2>';
 			echo '<div class="row">';
 			while($item_row = $items->fetch_assoc()){
@@ -37,7 +38,7 @@ if($number_rows != 0){
 				create_list_item($id, $image, $date_only, $name, $category, $description, $quantity, $available, $lost, $broken);
 				echo '</ul></div>';
 			}
-			echo '</div>';
+			echo '</div></div>';
 		}
 	}
 }

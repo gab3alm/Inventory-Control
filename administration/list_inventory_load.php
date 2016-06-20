@@ -8,7 +8,31 @@
 <body>
 	<link rel="stylesheet" href="../sass/admin_list_inventory.css">
 
-
+	<div class="row">
+		<div class="col s4">
+			<div class="input-field col s12">
+				<select multiple id="category-dropdown">
+					<option value="" disabled selected>Available Categories</option>
+					<script>
+						$.ajax({
+							type: "POST",
+							url: "./scripts/get_categories.php",
+							data: {'CURRENT-CATEGORY': ""},
+							success: function(response){
+								$("#category-dropdown").append(response);
+								$('select').material_select();
+								$('.item-category-section').hide();
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log(errorThrown);
+							}
+						});
+					</script>
+				</select>
+				<label>Active Categories</label>
+			</div>
+		</div>
+	</div>
 
 
 	<!--||||||||||||||||||||||||||||||||||-->
