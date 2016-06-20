@@ -17,6 +17,21 @@
 
 
 
+	<!-- DELETION WARNING MODAL -->
+	<div id="deletion-warning" class="modal">
+		<div class="modal-content">
+			<div class="row">
+				<h4 class="deletion-warning">are you sure you want to delete this item?</h4>
+			</div>
+			<p class="deletion-message">This deletion is permanent</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" id="cancel-modal-deletion" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<a href="#!" id="commit-modal-deletion" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+		</div>
+	</div>
+
+
 
 
 

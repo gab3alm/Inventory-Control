@@ -55,8 +55,14 @@ function create_list_item($id, $image, $date_only, $name, $category, $descriptio
 	<li id="'.$id.'" class="list-item-container">
 		<div class="collapsible-header">
 			<div class="row">
-				<div class="col s4 name-field"><p class="list-title">name</p><p class="editable-name editable">'.$name.'</p></div>
-				<div class="col s4 category-field"><p class="list-title">category</p><p class="editable-category editable">'.$category.'</p></div>
+				<div class="col s4">
+					<div class="row"><p class="list-title">name</p><p class="editable-name editable">'.$name.'</p></div>
+					<div class="row name-field"></div>
+				</div>
+				<div class="col s4 ">
+					<div class="row"><p class="list-title">category</p><p class="editable-category editable">'.$category.'</p></div>
+					<div class="row category-field"></div>
+				</div>
 				<div class="col s4"><p class="list-title">date added</p><p class="editable">'.$date_only.'</p></div>
 				<div class="action-btn-holder">
 					<img class="update-btn action-btn tooltipped" data-position="left" data-delay="50" data-tooltip="Update Item" src="../images/update.svg" alt="update item">
@@ -71,22 +77,39 @@ function create_list_item($id, $image, $date_only, $name, $category, $descriptio
 				<div class="col s6 l4">
 					<img class="editable-image item-image" src="../images/inventory/default.svg" alt="">
 				</div>
-				<div class="col s6 l8 description-field">
-					<p class="editable-description editable">'.$description.'</p>
+				<div class="col s6 l8">
+					<div class="row">
+						<p class="editable-description editable">'.$description.'</p>
+					</div>
+					<div class="row description-field"></div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col s3 quantity-field">
-					<span class="list-title">quantity: </span><p class="editable-quantity editable">'.$quantity.'</p>
+				<div class="col s3">
+					<div class="row">
+						<span class="list-title">quantity: </span><p class="editable-quantity editable">'.$quantity.'</p>
+					</div>
+					<div class="row quantity-field"></div>
 				</div>
-				<div class="col s3 available-field">
-					<span class="list-title">available: </span><p class="editable-available editable">'.$available.'</p>
+				<div class="col s3">
+					<div class="row">
+						<span class="list-title">available: </span><p class="editable-available editable">'.$available.'</p>
+					</div>
+					<div class="row available-field"></div>
 				</div>
-				<div class="col s3 lost-field">
-					<span class="list-title">lost: </span><p class="editable-lost editable">'.$lost.'</p>
+				<div class="col s3">
+					<div class="row">
+						<span class="list-title">lost: </span><p class="editable-lost editable">'.$lost.'</p>
+					</div>
+					<div class="row lost-field"></div>
 				</div>
-				<div class="col s3 broken-field">
-					<span class="list-title">broken: </span><p class="editable-broken editable">'.$broken.'</p>
+				<div class="col s3">
+					<div class="row">	
+						<span class="list-title">broken: </span><p class="editable-broken editable">'.$broken.'</p>
+					</div>
+					<div class="row broken-field">
+
+					</div>
 				</div>
 			</div>
 		</div>

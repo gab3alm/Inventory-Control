@@ -8,7 +8,6 @@
 	font-weight:bold;
 	text-transform: capitalize;
 	border-bottom:1px solid rgba(0,0,0,.45);
-	margin-bottom:0px;
 	padding:0px !important;
 }
 
@@ -40,7 +39,7 @@
 
 .action-btn-holder{
 	position:absolute;
-	top:5px;
+	top:25px;
 	right:0px;
 	display:none;
 }
@@ -50,6 +49,6 @@
 	margin-right:10px;
 }
 
-.input-field{
-	margin-top:-20px !important;
+.deletion-warning{
+	color:red;
 }

@@ -1,3 +1,6 @@
+// global for element about to be deleted
+var element = "";
+
 $(document).ready(function () {
     show_action_buttons();
     initialize_actions();
@@ -31,9 +34,11 @@ function initialize_actions() {
         $('#deletion_modal').openModal({
             dismissible: true,
         });
-        $("#delete").click(function () {
-            delete_card(card);
-        });
+        element = card;
+    });
+
+    $("#delete").click(function () {
+        delete_card(element);
     });
 
 }
@@ -62,7 +67,7 @@ function create_editable_card(card) {
     console.log(current_category);
     $.ajax({
         url: "scripts/get_categories.php",
-         type: "POST",
+        type: "POST",
         data: {
             "CURRENT-CATEGORY": current_category,
         },
@@ -199,8 +204,8 @@ function delete_card(card) {
         },
         success: function (response) {
             // you will get response from your php page (what you echo or print)
-            //Materialize.toast(response, 4000);
-            $("#inventory_area").empty().load("scripts/card_inventory.php");
+            $(card).closest(".col").remove();
+            Materialize.toast(response, 4000);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
