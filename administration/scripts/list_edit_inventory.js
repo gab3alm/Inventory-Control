@@ -4,7 +4,16 @@ var element = "";
 $(document).ready(function(){
 	$('.collapsible').collapsible();
 	activate_buttons();
+	toggle_category_sections();
 });
+
+function toggle_category_sections(){
+	$(".dropdown-content li").click(function(){
+		var category = $(this).find("span").text();
+		category = category.replace(" ", "_").toUpperCase();
+		$('#'+category).fadeToggle(400);
+	});
+}
 
 function activate_buttons(){
 	$(".list-item-container").hover(function(){

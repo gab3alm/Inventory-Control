@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['CATEGORY'] == 'admin' && $_SESSION['USER'] != ""){
   $user = ucfirst($_SESSION['USER']);	
 }else{
-  header("location: ../public/user_login.php");
+  header("location: ../public");
 }
 ?>
 

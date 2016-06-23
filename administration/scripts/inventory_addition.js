@@ -1,9 +1,18 @@
 $(document).ready(function () {
 	add_button();
+	toggle_category_sections();
 	$("#add_it").click(function () {
 		item_to_db();
 	});
 });
+
+function toggle_category_sections(){
+	$(".dropdown-content li").click(function(){
+		var category = $(this).find("span").text();
+		category = category.replace(" ", "_").toUpperCase();
+		$('#'+category).fadeToggle(400);
+	});
+}
 
 function add_button() {
 	$(".item_addition").click(function () {

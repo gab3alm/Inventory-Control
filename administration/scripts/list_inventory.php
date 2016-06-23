@@ -19,8 +19,11 @@ if($number_rows != 0){
 		$items = $connection->query($statement);
 		$number_items = $items->num_rows;
 		if($number_items != 0){
-			echo '<div id="'.$target.'" class="item-category-section">';
-			echo '<h2 class="category-heading">'.$target.'</h2>';
+			$clean_target = strtoupper($target);
+			echo '<div id="'.$clean_target.'" class="item-category-section">';
+			$clean_title = str_replace("_", " ", $target);
+			$clean_title = ucwords($clean_title);
+			echo '<h2 class="category-heading">'.$clean_title.'</h2>';
 			echo '<div class="row">';
 			while($item_row = $items->fetch_assoc()){
 				echo '<div class="col s12 l6"><ul class="collapsible hoverable" data-collapsible="expandable">';
@@ -39,6 +42,17 @@ if($number_rows != 0){
 				echo '</ul></div>';
 			}
 			echo '</div></div>';
+		}else{
+			// there are no items in that section
+			$clean_target = strtoupper($target);
+			echo '
+			<div id="'.$clean_target.'" class="item-category-section">
+				<h2 class="category-heading">'.$target.'</h2>
+				<div class="row center-align">
+					<h5>Oops, there are no items in this section</h5>
+				</div>
+			</div>
+			';
 		}
 	}
 }
