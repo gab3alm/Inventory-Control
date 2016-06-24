@@ -1,18 +1,10 @@
 $(document).ready(function () {
 	add_button();
-	toggle_category_sections();
 	$("#add_it").click(function () {
 		item_to_db();
 	});
 });
 
-function toggle_category_sections(){
-	$(".dropdown-content li").click(function(){
-		var category = $(this).find("span").text();
-		category = category.replace(" ", "_").toUpperCase();
-		$('#'+category).fadeToggle(400);
-	});
-}
 
 function add_button() {
 	$(".item_addition").click(function () {
@@ -24,7 +16,9 @@ function add_button() {
 				$("#item-name").val("");
 				$("#item-quantity").val("");
 			},
-			complete: function () {}
+			complete: function () {
+				toggle_category_sections();
+			}
 		});
 		$('select').material_select();
 		$('textarea#item-description').characterCounter();
@@ -55,6 +49,7 @@ function item_to_db() {
 			// you will get response from your php page (what you echo or print)                 
 			$('#addition_modal').closeModal();
 			Materialize.toast(response, 4000);
+			// need to avoid loading ... make the addition of the element manual - future
 			$("#inventory_area").empty().load("scripts/card_inventory.php");
 		},
 		error: function (jqXHR, textStatus, errorThrown) {

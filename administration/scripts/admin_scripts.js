@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	// $("#application_area").load("main_load.php");
 	ajax_call("main_load", "");
 	admin_operations();
 	animate_avatar();

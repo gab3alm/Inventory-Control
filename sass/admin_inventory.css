@@ -7,6 +7,11 @@
     z-index: 1;
 }
 
+.row.category-dropdown-toggle{
+    margin-top:-40px;
+    padding:0px;
+}
+
 .item-image {
     height: 150px;
     margin: 10px 0px 10px 0px;
@@ -90,12 +95,6 @@
     opacity: 0;
 }
 
-#delete-btn,
-#update-btn {
-    border: 2px solid black;
-}
-
-
 /*Styles for small screens*/
 
 @media(max-width:768px) {
@@ -138,4 +137,31 @@
 
 .view-selection{
     margin-top:-10px;
+}
+
+.item-category-section{
+    display:none;
+}
+
+.action-btn-holder{
+    opacity:0;
+    position:relative;
+    height:35px;
+}
+
+.update-btn, .submit-btn, .delete-btn, .cancel-btn{
+    position:absolute;
+    top:10px;
+}
+
+.update-btn, .submit-btn{
+    right:60px;
+}
+
+.delete-btn, .cancel-btn{
+    right:10px;
+}
+
+.submit-btn, .cancel-btn{
+    display:none;
 }

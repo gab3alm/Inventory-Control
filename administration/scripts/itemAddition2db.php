@@ -12,6 +12,9 @@
 	$quantity = $_POST['ITEM-QUANTITY'];
 	$available = $_POST['ITEM-QUANTITY'];
 
+	$category = strtolower($category);
+	$category = str_replace(" ", "_", $category);
+
 	$statement = "INSERT INTO `inventory`(`name`, `category`, `description`, `quantity`, `available`) VALUES ('$name','$category','$description','$quantity','$available')";
 	if($connection->query($statement)=== true){
 		echo 'Item has been added successfully!';

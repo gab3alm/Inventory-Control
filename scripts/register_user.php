@@ -8,10 +8,11 @@
         die("Connection failed: " . $connection->connect_error);
     }
 
-    $username   = $_POST['USERNAME'];
+    //user input has to be sanitized - implementation will be future.
+    $username   = strtolower($_POST['USERNAME']);
     $password   = password_hash($_POST['PASSWORD'], PASSWORD_DEFAULT);
-    $first_name = $_POST['FIRST'];
-    $last_name  = $_POST['LAST'];
+    $first_name = strtolower($_POST['FIRST']);
+    $last_name  = strtolower($_POST['LAST']);
     $phone      = $_POST['PHONE'];
 	
 	$statement = "INSERT INTO `users`(`username`, `password`, `firstname`, `lastname`, `phone`) VALUES ('$username','$password','$first_name','$last_name','$phone')";

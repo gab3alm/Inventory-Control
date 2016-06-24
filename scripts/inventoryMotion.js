@@ -1,9 +1,11 @@
 // Item_cart is just an array to store the values of arrays.
+// [ [ItemID][ItemAMOUNT][ItemReturnStatus] ]
 var item_cart = [];
 
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||\
 //RANDOMIZE BACKGROUND - START
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||\
+//Currently not used
 function randomize_background() {
 	var num = getRandomInt(1, 5);
 	var image = "nature" + num + ".jpg";

@@ -65,7 +65,14 @@
 		$connection->close();
 	}
 	
+	// spits out markup for the create_main_bubbles method
 	function create_main_category_bubbles($category, $side){
+		//$side refers to right, center, left
+		//It used to shorten the distance between the main bubbles in the student inventory page
+		//   [right-align] [center-align] [left-align]
+		//   [right-align] [center-align] [left-align]
+		//   [right-align] [center-align] [left-align]
+		//   look at the inventory page to understand the visual thingy!
 		echo '
 			<div class="col s12 m4">
 				<div class="'.$side.'">
@@ -81,6 +88,7 @@
 		';
 	}
 
+	// spits out markup for the create_side_bubbles method
 	function create_side_category_bubble($category){
 		echo '
 			<div class="col s1">

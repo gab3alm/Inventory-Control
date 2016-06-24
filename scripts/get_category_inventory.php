@@ -1,18 +1,20 @@
 <?php
-		// include the database data
+// include the database data
 include("db_connect.php");
-		//test the connection
+//test the connection
 if($connection->connect_error){
 	die("Connection to database failed ". $connection->connect_error);
 }
-		//Connection has been tested and we are ready to go
-		//$category = $_POST['CATEGORY'];
+
+//Connection has been tested and we are ready to go
+//$category = $_POST['CATEGORY'];
 $table = "categories";
 $statement = "SELECT * FROM $table";
 $category_list = $connection->query($statement);
 $category_rows = $category_list->num_rows;
-		//check if you have any items in the selected category
+//check if you have any categories in the "categories" table
 if($category_rows != 0){
+	//iterate through all available categories
 	while($category_row = $category_list->fetch_assoc()){
 		$table = "inventory";
 		$category = $category_row['category'];
@@ -22,6 +24,7 @@ if($category_rows != 0){
 		if($inventory_items_amount != 0){
 			echo '<div id="'.$category.'_inventory" class="category-section row"><h3>'.$category.'</h3>';	
 			while($single_item = $inventory_items->fetch_assoc()){
+				//iterate through every item present within current category
 				$id = $single_item['identification'];
 				$image = $single_item['image_name'];
 				$name = $single_item['name'];
@@ -42,12 +45,21 @@ if($category_rows != 0){
 		}
 	}	
 }else{
-			// you have no items in the category table, which is bad!
+	// you have no items in the category table, which is bad!
 }
-
 $connection->close();
 
+/**
+ * [create_inventory_item - creates a single item card element for the student inventory view]
+ * @param  [integer] $id               [description]
+ * @param  [string] $item_image       [description]
+ * @param  [string] $item_name        [description]
+ * @param  [string] $item_description [description]
+ * @param  [integer] $item_available   [description]
+ * @return [void]                   [echoes the markup for the element values passed in.]
+ */
 function create_inventory_item($id, $item_image, $item_name, $item_description, $item_available){
+	// markup relates to the css framework used - materializecss.com
 	$card_id = "";
 	$card_class= "";
 	if($item_available != "0"){

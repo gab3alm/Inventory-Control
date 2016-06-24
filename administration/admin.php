@@ -17,7 +17,6 @@ if($_SESSION['CATEGORY'] == 'admin' && $_SESSION['USER'] != ""){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../sass/admin.css">
-  <link rel="stylesheet" href="../sass/admin_inventory.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="../resources/materialize.js"></script>
   <script src="scripts/admin_scripts.js"></script>

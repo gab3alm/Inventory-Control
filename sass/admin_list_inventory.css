@@ -54,14 +54,44 @@
 }
 
 .item_addition {
-    height: 50px;
-    border-radius: 50%;
-    position: fixed;
-    top: 220px;
-    right: 30px;
-    z-index: 1;
+	height: 50px;
+	border-radius: 50%;
+	position: fixed;
+	top: 220px;
+	right: 30px;
+	z-index: 1;
 }
 
 .item-category-section{
 	display:none;
+}
+
+/*Styles for small screens*/
+@media(max-width:768px) {
+	.modal {
+		padding: 0px !important;
+		margin: 0px !important;
+		width: 100% !important;
+	}
+}
+
+.modal {
+	width: 25% !important;
+}
+
+.modal-header {
+	font-family: lato;
+	text-transform: capitalize;
+	font-size: 1.5em;
+	margin: 0px !important;
+}
+
+.addition-label {
+	text-transform: capitalize !important;
+}
+
+.category-heading{
+	font-family:lato;
+	font-size:2em;
+	font-weight:bold;
 }

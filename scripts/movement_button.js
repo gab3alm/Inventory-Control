@@ -18,7 +18,6 @@ function next() {
 			left: "-100%"
 		}, 800);
 	});
-
 }
 
 function previous() {

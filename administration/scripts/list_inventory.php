@@ -13,6 +13,9 @@ $number_rows = $result->num_rows;
 if($number_rows != 0){
 	send_out_scripts();
 	while($row = $result->fetch_assoc()){
+		// ||||||||||||||||||||||||||||||||||||||||||||
+		// SELECTING EVERY CATEGORY FIELD IN DATABASE
+		// ||||||||||||||||||||||||||||||||||||||||||||
 		$table2 = "inventory";
 		$target = $row["category"];
 		$statement = "SELECT * FROM $table2 WHERE category='$target'";
@@ -20,12 +23,16 @@ if($number_rows != 0){
 		$number_items = $items->num_rows;
 		if($number_items != 0){
 			$clean_target = strtoupper($target);
+			// WRAPPER FOR ENTIRE ITEM CATEGORY - used to hide and show through dropdown selection
 			echo '<div id="'.$clean_target.'" class="item-category-section">';
 			$clean_title = str_replace("_", " ", $target);
 			$clean_title = ucwords($clean_title);
 			echo '<h2 class="category-heading">'.$clean_title.'</h2>';
 			echo '<div class="row">';
 			while($item_row = $items->fetch_assoc()){
+				// ||||||||||||||||||||||||||||||||||||||||||||
+				// SELECTING EVERY ITEM IN CURRENT CATEGORY
+				// ||||||||||||||||||||||||||||||||||||||||||||
 				echo '<div class="col s12 l6"><ul class="collapsible hoverable" data-collapsible="expandable">';
 				$id = $item_row["identification"]; 
 				$image = $item_row["image_name"];
@@ -33,6 +40,8 @@ if($number_rows != 0){
 				$date_only = $date_added[0];  
 				$name = $item_row["name"]; 
 				$category = $item_row["category"];  
+				$category = str_replace("_", " ", $category);
+				$category = ucwords($category);
 				$description = $item_row["description"]; 
 				$quantity = $item_row["quantity"]; 
 				$available = $item_row["available"];  
@@ -58,13 +67,29 @@ if($number_rows != 0){
 }
 $connection->close();
 
+// this is the wrong way of doing this. Gotta use jquery load script thingy. Future!
 function send_out_scripts(){
 	echo'
 	<script src="scripts/list_edit_inventory.js"></script>
 	';
 }
 
-
+/**
+ * [create_list_item : look at that puppy, hug it! it doesnt bite, unless you erase one closing div statement
+ * NOTE: <div class="row something-field"></div> is used to insert user input in update mode. Done in list_edit_inventory.js
+ * ]
+ * @param  [INT] $id          		[unique item identifier]
+ * @param  [STRING] $image      	[image name - not used right now]
+ * @param  [DATE] $date_only   		[date in which item was added]
+ * @param  [STRING] $name        	[name of the item]
+ * @param  [STRING] $category    	[category of item]
+ * @param  [STRING] $description 	[description of item]
+ * @param  [INT] $quantity    		[quantity of item]
+ * @param  [INT] $available   		[available quantity of item]
+ * @param  [INT] $lost        		[lost quantity of item]
+ * @param  [INT] $broken      		[broken quantity of item]
+ * @return [VOID]              		[returns list item markup]
+ */
 function create_list_item($id, $image, $date_only, $name, $category, $description, $quantity, $available, $lost, $broken){
 	echo '
 	<li id="'.$id.'" class="list-item-container">

@@ -10,6 +10,18 @@
   <link rel="stylesheet" href="../sass/admin_inventory.css">
 
   <div class="container-fluid">
+    <div class="row category-dropdown-toggle">
+      <div class="col s12 l2">
+        <div class="input-field col s12">
+          <select multiple id="category-dropdown">
+            <option value="" disabled selected>Available Categories</option>
+          </select>
+          <label>Active Categories</label>
+        </div>
+      </div>
+    </div>
+
+
     <!--||||||||||||||||||||||||||||||||||-->
     <!--|||MODAL BUTTON AND ITS STRUCTURE SECTION-->
     <!--||||||||||||||||||||||||||||||||||-->
@@ -89,7 +101,6 @@
       </div>
     </div>
 
-
     <!--||||||||||||||||||||||||||||||||||-->
     <!--|||DEMONSTRATION FOR ITEMS IN THE INVENTORY-->
     <!--||||||||||||||||||||||||||||||||||-->
@@ -106,8 +117,23 @@
 
 
 
-
-
+  <!-- ||||||||||||||||||||||||||||||||||||||||||| -->
+  <!-- ||SCRIPT FOR SELECTING DROPDOWN CATEGORIES  -->
+  <!-- ||||||||||||||||||||||||||||||||||||||||||| -->
+  <script>
+    $.ajax({
+      type: "POST",
+      url: "./scripts/get_categories.php",
+      data: {'CURRENT-CATEGORY': ""},
+      success: function(response){
+        $("#category-dropdown").append(response);
+        $('select').material_select();
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        console.log(errorThrown);
+      }
+    });
+  </script>
   <script src="scripts/inventory_addition.js"></script>
 </div>
 

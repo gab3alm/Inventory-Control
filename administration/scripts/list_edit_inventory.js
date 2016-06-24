@@ -2,19 +2,26 @@
 var element = "";
 
 $(document).ready(function(){
+	//initializes all list (collapsibles) elements in views - http://materializecss.com/collapsible.html
 	$('.collapsible').collapsible();
 	activate_buttons();
 	toggle_category_sections();
 });
 
+// shows | hides selected category sections from the categories dropdown
+// look at list_inventory.php -> create_list_item(...) to understand the structure of the category 
+// sections and elements.
 function toggle_category_sections(){
-	$(".dropdown-content li").click(function(){
+	$(".multiple-select-dropdown li").click(function(){
 		var category = $(this).find("span").text();
 		category = category.replace(" ", "_").toUpperCase();
 		$('#'+category).fadeToggle(400);
 	});
 }
 
+//functions of all the element buttons 
+// hover | update | delete | submit changes | cancel changes
+// look at list_inventory.php to understand selectors being used.
 function activate_buttons(){
 	$(".list-item-container").hover(function(){
 		$('.tooltipped').tooltip({delay: 50});
@@ -62,6 +69,7 @@ function activate_buttons(){
 	});
 }
 
+// deletes a selected element
 function delete_item(item){
 	var row = $(item).attr("id");
 	$.ajax({
@@ -73,6 +81,7 @@ function delete_item(item){
 		success: function (response) {
             // you will get response from your php page (what you echo or print)
             Materialize.toast(response, 4000);
+            // look at list_inventory.php to understand the selector used.
             $(item).parents("div:first").remove();
             // loading again makes the script run twice every time you delete. 
             // The script call is duplicated every time you load (very bad)
@@ -86,6 +95,9 @@ function delete_item(item){
 	$('.tooltipped').tooltip('remove');
 }
 
+//updates the database with new information - only when submitting changes
+//If the operation is successful it changes the element fields manually to 
+//avoid a reload
 function update_db(item){
 	var row = $(item).attr("id");
 	var name = $(item).find("#editable-name").val();
@@ -123,6 +135,10 @@ function update_db(item){
 	$('.tooltipped').tooltip('remove');
 }
 
+//User decides to go through and apply his changes to the element, 
+//Before I was doing ajax Load to show changes but that was ugly and function calls were doubling on each load
+//Now - I just update the element fields manually, it looks so much better since the screen doesnt flicker (refresh)
+//Look at list_inventory.php to understand the selectors being used.
 function list_item_update(item, name, category, description, quantity, available, lost, broken){
 	$(item).find(".name-field").empty();
 	$(item).find(".editable-name").empty().append(name).fadeIn(400);
@@ -146,6 +162,9 @@ function list_item_update(item, name, category, description, quantity, available
 	$(item).find(".editable-broken").empty().append(broken).fadeIn(400);
 }
 
+// Since the default values for every field were hidden when making the editable element,
+// if the user decides to cancel changes, you can just empty the input field and show the 
+// default fields that were initially hidden
 function list_item_default(item){
 	$(item).find(".name-field").empty();
 	$(item).find(".editable-name").fadeIn(400);
@@ -169,7 +188,8 @@ function list_item_default(item){
 	$(item).find(".editable-broken").fadeIn(400);
 }
 
-
+// hides | shows - update && delete button
+// hides | shows - submit $$ cancel button
 function replace_action_buttons(item, phase){
 	if(phase == "show-submit-cancel"){
 		$(item).find(".update-btn").hide(400, function(){
@@ -188,15 +208,29 @@ function replace_action_buttons(item, phase){
 	}
 }
 
-
-function create_editable_item(item){
-	$(item).find(".collapsible-header").removeClass("active");	
-	replace_action_buttons(item, "show-submit-cancel");
+/**
+ * [create_editable_item : makes the selected list item into an editable item]
+ * @param  {[list item]} item [selected list item object]
+ * @return {[void]}      [description]
+ *
+ * NOTE: In order to avoid refreshes or jquery loads, the current values were hidden
+ * and the new input fields were inserted into the
+ * "<div class="something-field"></div>"
+ * element in the list_inventory.php file
+ *
+ * Jquery loads are bad since they stop other scripts from running, you can call them again through function names 
+ * but then you gotta keep track of all the function calls and stuff get called twice and you end up with a whole mess.
+ * point is, do not make jquery loads at this point.
+ * Just edit eveything manually - it looks better (visually) and all your scripts are good to go.
+ */
+ function create_editable_item(item){
+ 	$(item).find(".collapsible-header").removeClass("active");	
+ 	replace_action_buttons(item, "show-submit-cancel");
 	// GET CURRENT DATA IN ITEM - SEE list_inventory.php for item structure
 	var curr_name = $(item).find(".editable-name").html(); 
 	var curr_category = $(item).find(".editable-category").html(); 
 	// var image = $(item).find(".editable-image").html(); 
-	var curr_description = $(item).find(".editable-description").html(); 
+	var curr_description = $(item).find(".editable-description").html();
 	var curr_quantity = $(item).find(".editable-quantity").html();
 	var curr_available = $(item).find(".editable-available").html(); 
 	var curr_lost = $(item).find(".editable-lost").html(); 
@@ -217,6 +251,7 @@ function create_editable_item(item){
 	//||||||||||||||||||||||||||||||||||||||||||||||
     //|||CREATE THE EDITABLE CATEGORY FIELD
     //||||||||||||||||||||||||||||||||||||||||||||||
+    curr_category = curr_category.replace(" ", "_").toLowerCase();
     $(item).find(".editable-category").hide();
     $.ajax({
     	url: "scripts/get_categories.php",
@@ -231,11 +266,12 @@ function create_editable_item(item){
     		var box = start + options + end;
     		$(item).find(".category-field").append(box);
     		$('select').material_select();
+    		toggle_category_sections();
     	}
     });
 
     //||||||||||||||||||||||||||||||||||||||||||||||
-    //|||CREATE THE EDITABLE DESCRIPTION FIELD
+    //|||CREATE THE EDITABLE DESCRIPTION FIELD -- SEE list_inventory.php to understand structure
     //||||||||||||||||||||||||||||||||||||||||||||||	
     $(item).find(".editable-description").hide();
     var description_field = `
@@ -248,7 +284,7 @@ function create_editable_item(item){
 
 
     //||||||||||||||||||||||||||||||||||||||||||||||
-    //|||CREATE THE EDITABLE QUANTITY FIELD
+    //|||CREATE THE EDITABLE QUANTITY FIELD -- SEE list_inventory.php to understand structure
     //||||||||||||||||||||||||||||||||||||||||||||||	
     $(item).find(".editable-quantity").hide();
     var quantity_field = `
@@ -259,7 +295,7 @@ function create_editable_item(item){
 
 
     //||||||||||||||||||||||||||||||||||||||||||||||
-    //|||CREATE THE EDITABLE AVAILABLE FIELD
+    //|||CREATE THE EDITABLE AVAILABLE FIELD -- SEE list_inventory.php to understand structure 
     //||||||||||||||||||||||||||||||||||||||||||||||	
     $(item).find(".editable-available").hide();
     var available_field = `
@@ -269,7 +305,7 @@ function create_editable_item(item){
     $(item).find(".available-field").append(available_field);
 
     //||||||||||||||||||||||||||||||||||||||||||||||
-    //|||CREATE THE EDITABLE LOST FIELD
+    //|||CREATE THE EDITABLE LOST FIELD -- SEE list_inventory.php to understand structure
     //||||||||||||||||||||||||||||||||||||||||||||||	
     $(item).find(".editable-lost").hide();
     var lost_field = `
@@ -281,7 +317,7 @@ function create_editable_item(item){
     $(item).find(".lost-field").append(lost_field);
 
     //||||||||||||||||||||||||||||||||||||||||||||||
-    //|||CREATE THE EDITABLE BROKEN FIELD
+    //|||CREATE THE EDITABLE BROKEN FIELD -- SEE list_inventory.php to understand structure 
     //||||||||||||||||||||||||||||||||||||||||||||||	
     $(item).find(".editable-broken").hide();
     var broken_field = `
